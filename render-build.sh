@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== Installing frontend dependencies ==="
+echo "=== Installing frontend ==="
 cd frontend
-npm install --legacy-peer-deps
-echo "vite exists: $(ls node_modules/vite/bin/vite.js 2>/dev/null && echo YES || echo NO)"
+npm install --no-workspaces
+echo "vite: $(ls node_modules/vite 2>/dev/null && echo YES || echo NO)"
 node node_modules/vite/bin/vite.js build
 cd ..
 
-echo "=== Installing admin dependencies ==="
+echo "=== Installing admin ==="
 cd admin
-npm install --legacy-peer-deps
+npm install --no-workspaces
 node node_modules/vite/bin/vite.js build
 cd ..
 
-echo "=== Installing backend dependencies ==="
+echo "=== Installing backend ==="
 cd backend
-npm install
+npm install --no-workspaces
 cd ..
 
-echo "=== Build complete ==="
+echo "=== Done ==="
