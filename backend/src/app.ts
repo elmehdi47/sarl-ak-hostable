@@ -58,12 +58,12 @@ if (process.env.NODE_ENV === "production") {
   app.use("/admin", express.static(adminDist));
 
   // SPA fallback for admin
-  app.get("/admin/*", (_req, res) => {
+  app.get("/admin/*splat", (_req, res) => {
     res.sendFile(path.join(adminDist, "index.html"));
   });
 
   // SPA fallback for frontend (catch-all, must be last)
-  app.get("*", (_req, res) => {
+  app.get("*splat", (_req, res) => {
     res.sendFile(path.join(frontendDist, "index.html"));
   });
 }
