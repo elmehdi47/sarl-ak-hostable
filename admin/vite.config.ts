@@ -14,7 +14,6 @@ export default defineConfig({
     },
     dedupe: ["react", "react-dom"],
   },
-  base: "/admin/",
   build: {
     outDir: "dist",
     emptyOutDir: true,
