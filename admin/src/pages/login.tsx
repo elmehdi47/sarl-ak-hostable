@@ -45,7 +45,7 @@ export default function LoginPage() {
           title: "Success",
           description: "Logged in successfully",
         });
-        setLocation("/dashboard");
+        setLocation("/admin/dashboard");
       },
       onError: (error) => {
         toast({
