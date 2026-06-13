@@ -49,14 +49,12 @@ app.use(session({
 
 app.use("/api", router);
 
-// Serve frontend static files
 const frontendDist = path.join(process.cwd(), "../frontend/dist");
 const adminDist = path.join(process.cwd(), "../admin/dist");
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(frontendDist));
   app.use("/admin", express.static(adminDist));
-  app.use("/admin/assets", express.static(path.join(adminDist, "assets")));
 
   app.get("/admin", (_req, res) => {
     res.sendFile(path.join(adminDist, "index.html"));
