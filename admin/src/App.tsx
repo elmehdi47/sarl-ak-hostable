@@ -63,7 +63,7 @@ function DashboardRoutes() {
 
 function Router() {
   return (
-    <Switch>
+    <Switch base="/admin">
       <Route path="/login" component={LoginPage} />
       <Route path="/dashboard" component={DashboardRoutes} />
       <Route path="/dashboard/*" component={DashboardRoutes} />
