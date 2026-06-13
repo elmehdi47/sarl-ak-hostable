@@ -38,7 +38,7 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
   const { data: user, isLoading, isError } = useAuth();
   const [, setLocation] = useLocation();
   useEffect(() => {
-    if (!isLoading && (isError || !user)) setLocation("/login");
+    if (!isLoading && (isError || !user)) setLocation("/admin/login");
   }, [isLoading, isError, user]);
   if (isLoading) return <LoadingSpinner />;
   if (isError || !user) return null;
@@ -49,12 +49,12 @@ function DashboardRoutes() {
   return (
     <DashboardLayout>
       <Switch>
-        <Route path="/dashboard" component={() => <ProtectedRoute component={DashboardOverview} />} />
-        <Route path="/dashboard/products" component={() => <ProtectedRoute component={DashboardProducts} />} />
-        <Route path="/dashboard/categories" component={() => <ProtectedRoute component={DashboardCategories} />} />
-        <Route path="/dashboard/inquiries" component={() => <ProtectedRoute component={DashboardInquiries} />} />
-        <Route path="/dashboard/orders" component={() => <ProtectedRoute component={DashboardOrders} />} />
-        <Route path="/dashboard/site-images" component={() => <ProtectedRoute component={DashboardSiteImages} />} />
+        <Route path="/admin/dashboard" component={() => <ProtectedRoute component={DashboardOverview} />} />
+        <Route path="/admin/dashboard/products" component={() => <ProtectedRoute component={DashboardProducts} />} />
+        <Route path="/admin/dashboard/categories" component={() => <ProtectedRoute component={DashboardCategories} />} />
+        <Route path="/admin/dashboard/inquiries" component={() => <ProtectedRoute component={DashboardInquiries} />} />
+        <Route path="/admin/dashboard/orders" component={() => <ProtectedRoute component={DashboardOrders} />} />
+        <Route path="/admin/dashboard/site-images" component={() => <ProtectedRoute component={DashboardSiteImages} />} />
         <Route component={NotFound} />
       </Switch>
     </DashboardLayout>
@@ -63,12 +63,15 @@ function DashboardRoutes() {
 
 function Router() {
   return (
-    <Switch base="/admin">
-      <Route path="/login" component={LoginPage} />
-      <Route path="/dashboard" component={DashboardRoutes} />
-      <Route path="/dashboard/*" component={DashboardRoutes} />
+    <Switch>
+      <Route path="/admin/login" component={LoginPage} />
+      <Route path="/admin/dashboard" component={DashboardRoutes} />
+      <Route path="/admin/dashboard/*" component={DashboardRoutes} />
+      <Route path="/admin">
+        <Redirect to="/admin/dashboard" />
+      </Route>
       <Route path="/">
-        <Redirect to="/dashboard" />
+        <Redirect to="/admin/dashboard" />
       </Route>
       <Route component={NotFound} />
     </Switch>
